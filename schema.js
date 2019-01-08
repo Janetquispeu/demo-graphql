@@ -6,16 +6,32 @@ const schema = buildSchema(`
     nombre: String
     apellido: String
     empresa: String
-    emails: [Email]
-  }
-
-  type Email {
     email: String
+    edad: Int
+    tipo: TipoCliente
+  }
+  enum TipoCliente {
+    BASICO
+    PREMIUM
+  }
+  type Query {
+    getcliente(id: ID) : Cliente
   }
 
-  type Query {
-    cliente: Cliente
+  input ClienteInput {
+    id: ID
+    nombre: String!
+    apellido: String!
+    empresa: String!
+    email: String!
+    edad: Int!
+    tipo: TipoCliente!
   }
+
+  type Mutation {
+    crearCliente(input: ClienteInput) : Cliente
+  }
+
 `);
 
 export default schema;
