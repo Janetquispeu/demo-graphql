@@ -9,13 +9,26 @@ const schema = buildSchema(`
     email: String
     edad: Int
     tipo: TipoCliente
+    pedidos: [Pedido]
   }
+
+  type Pedido {
+    producto: String
+    precio: Int
+  }
+
   enum TipoCliente {
     BASICO
     PREMIUM
   }
+
   type Query {
     getcliente(id: ID) : Cliente
+  }
+
+  input PedidoInput {
+    producto: String
+    precio: Int
   }
 
   input ClienteInput {
@@ -26,6 +39,7 @@ const schema = buildSchema(`
     email: String!
     edad: Int!
     tipo: TipoCliente!
+    pedidos: [PedidoInput]
   }
 
   type Mutation {
