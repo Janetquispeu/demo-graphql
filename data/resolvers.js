@@ -1,3 +1,6 @@
+import mongoose from 'mongoose'
+import { Clientes } from './db';
+
 class Cliente {
   constructor(id, {nombre, apellido, empresa,
   email, edad, tipo, pedidos}) {
@@ -12,17 +15,30 @@ class Cliente {
   }
 }
 
-const clientesDB = {};
-
 // el resolver
-const resolver = {
-  getcliente: ({id}) => { 
-    return new Cliente(id, clientesDB[id]);
+export const resolver = {
+  Query: {
+    getcliente: ({id}) => { 
+      return new Cliente(id, clientesDB[id]);
+    }
   },
-  crearCliente: ({input}) => {
-    const id = require('crypto').randomBytes(5).toString('hex');
-    clientesDB[id] = input;
-    return new Cliente(id, input);
+  Mutation: {
+    crearCliente: (root, {input}) => {
+      const nuevoCliente = new Clientes({
+        id : id,
+        nombre : input.nombreid,
+        apellido : input.apellidoid,
+        empresa : input.empresaid,
+        email : input.emailid,
+        edad : input.edadid,
+        tipo : input.tipoid,
+        pedidos : input.pedidosid,
+      })
+
+      const id = require('crypto').randomBytes(5).toString('hex');
+      clientesDB[id] = input;
+      return new Cliente(id, input);
+    }
   }
 };
 
