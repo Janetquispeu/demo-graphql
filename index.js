@@ -1,7 +1,7 @@
 import express from 'express';
 // graphql
 import graphqlHTTP from 'express-graphql';
-import schema from './data/schema'
+import { schema } from './data/schema'
 // resolvers
 
 const app = express();
@@ -10,6 +10,7 @@ app.get('/', (req, res)=> {
   res.send('Todo Listo')
 });
 
+// middleware
 app.use('/graphql', graphqlHTTP({
   // que schema va a utilizar
   schema,
