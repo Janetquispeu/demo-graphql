@@ -24,7 +24,8 @@ enum TipoCliente {
 }
 
 type Query {
-  getcliente(id: ID) : Cliente
+  getClientes(limite: Int) : [Cliente]
+  getCliente(id: ID) : Cliente
 }
 
 input PedidoInput {
@@ -49,4 +50,6 @@ input ClienteInput {
 
 type Mutation {
   crearCliente(input: ClienteInput) : Cliente
+  actualizarCliente(input: ClienteInput) : Cliente
+  eliminarCliente(id: ID) : String
 }
